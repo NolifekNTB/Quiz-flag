@@ -21,13 +21,13 @@ class MainActivity : AppCompatActivity() {
         val btn3 = findViewById<Button>(R.id.btnThird)
         val btn4 = findViewById<Button>(R.id.btnFourth)
 
-        btn1.setOnClickListener { correctCheck(btn1) }
-        btn2.setOnClickListener { correctCheck(btn2) }
-        btn3.setOnClickListener { correctCheck(btn3) }
-        btn4.setOnClickListener { correctCheck(btn4) }
+        btn1.setOnClickListener { ifCorrectCheck(btn1) }
+        btn2.setOnClickListener { ifCorrectCheck(btn2) }
+        btn3.setOnClickListener { ifCorrectCheck(btn3) }
+        btn4.setOnClickListener { ifCorrectCheck(btn4) }
     }
 
-    private fun correctCheck(btn: Button) {
+    private fun ifCorrectCheck(btn: Button) {
         if (btn.text == correct) {
             Toast.makeText(this, "Correct", Toast.LENGTH_SHORT).show()
             rounds++
