@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.Toast
+import kotlin.random.Random
 
 class MainActivity : AppCompatActivity() {
 
@@ -43,15 +44,48 @@ class MainActivity : AppCompatActivity() {
             1 -> {
                 ivFlag.setImageResource(R.drawable.poland)
                 correct = Flag_list[0]
+                setButtonsAnswers()
             }
+
             2 -> {
                 ivFlag.setImageResource(R.drawable.germany)
                 correct = Flag_list[1]
+                setButtonsAnswers()
             }
+
             3 -> {
                 ivFlag.setImageResource(R.drawable.usa)
                 correct = Flag_list[2]
+                setButtonsAnswers()
             }
         }
+    }
+    private fun setButtonsAnswers(){
+        val listToSet = randomAnswers()
+
+        findViewById<Button>(R.id.btnFirst).text = listToSet[0]
+        findViewById<Button>(R.id.btnSecond).text = listToSet[1]
+        findViewById<Button>(R.id.btnThird).text = listToSet[2]
+        findViewById<Button>(R.id.btnFourth).text = listToSet[3]
+    }
+
+    private fun randomAnswers(): MutableList<String>{
+        val country = mutableListOf("Poland", "Russia", "Usa", "China", "Mongolia", "Norway", "Sweden", "Ukraine", "Iceland")
+        val answers = mutableListOf("", "", "", "")
+
+        //Define correct answer
+        val excludeIndex = Random.nextInt(0, 4)
+        answers[excludeIndex] = correct
+        country.removeAt(excludeIndex)
+
+        for (i in 0..3){
+            if (i == excludeIndex){
+                continue
+            }
+            val randomString = country[Random.nextInt(country.size-1)]
+            answers[i] = randomString
+            country.remove(randomString)
+        }
+        return answers
     }
 }
