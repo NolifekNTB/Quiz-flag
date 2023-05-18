@@ -1,5 +1,6 @@
 package com.example.quiz_flag
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
@@ -12,6 +13,7 @@ class MainActivity : AppCompatActivity() {
     var rounds = 1
     val Flag_list = mutableListOf("Poland", "Germany", "USA")
     var correct = Flag_list[0]
+    var score = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,9 +34,12 @@ class MainActivity : AppCompatActivity() {
         if (btn.text == correct) {
             Toast.makeText(this, "Correct", Toast.LENGTH_SHORT).show()
             rounds++
+            score++
             updateRound()
         } else {
             Toast.makeText(this, "Incorrect", Toast.LENGTH_SHORT).show()
+            rounds++
+            updateRound()
         }
     }
 
@@ -57,6 +62,10 @@ class MainActivity : AppCompatActivity() {
                 ivFlag.setImageResource(R.drawable.usa)
                 correct = Flag_list[2]
                 setButtonsAnswers()
+            }
+            4 -> {
+                startActivity(Intent(this, EndLogo::class.java)
+                    .putExtra("SCORE", score))
             }
         }
     }
